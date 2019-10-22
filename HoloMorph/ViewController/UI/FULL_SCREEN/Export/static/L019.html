@@ -1,0 +1,272 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>three.js webgl - controls - deviceorientation</title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="user-scalable=no, initial-scale=1">
+		<style>
+		  #my-gui-container{
+        position: absolute; 
+        top: 0; 
+        right: 0;
+        z-index: 100;
+      }
+
+		
+			body {
+				margin: 0px;
+				background-color: #000000;
+				overflow: hidden;
+			}
+
+			#info {
+				position: absolute;
+				top: 0px; width: 100%;
+				color: #ffffff;
+				padding: 5px;
+				font-family:Monospace;
+				font-size:13px;
+				font-weight: bold;
+				text-align:center;
+			}
+
+			a {
+				color: #ff8800;
+			}
+		</style>
+        <script>
+            function load_data()
+            {
+                var v = JSON.parse( JSON.stringify( d8a66434-e4a0-41bb-96be-fcdf60aaf50b ) );
+                return v;
+            }
+        </script>
+	</head>
+	<body>
+    <div id="container"></div>
+    <script>6a4efadd-c0bc-4b0a-837c-810cedfed93d</script><!-- script src="three.js"></script-->
+    <script>d3f4ce84-970c-488b-b3ea-dc63ecb1481f</script><!-- script src="OrbitControls.js"></script-->
+    <script>fc890bee-8aab-4d29-973a-8b5fe657aff3</script><!-- script src="Detector.js"></script-->
+    <script>db75f96b-efc4-4dc6-83d3-5ba8c18e5534</script><!-- script src="https://cosmosinfo.neocities.org/device_orientation_controls.js"></script -->
+    <script>19b33dee-abe1-46d7-a588-58e68a29173a</script><!-- script src="stats.min.js"></script-->
+    <script>acb39b03-c028-4ed0-8d76-082bc4aebd15</script><!-- script src="dat.gui.min.js"></script -->
+    <script>53366ace-bf8a-43f9-95c9-cd3cf72f702e</script><!-- script src="L008.js"></script-->
+    <script>
+    
+    var image2 = new Image();
+    image2.src = '09e43568-c30d-49e7-992e-16049bb8909b';
+    
+    </script>
+    <script>90a7e9f2-878e-46b9-8493-e551d6c4dec2</script><!-- script src="helper019.js"></script-->
+    <script>
+      var container, camera, scene, renderer, controls;
+      var stats;
+      //var geometry1, material1;
+      var geometry
+      var global
+      var uuid_that_you_dont_remove;
+      var uuid_that_you_dont_remove2;
+      var data;
+      
+      init();
+      animate();
+      
+      function get_random_position_from_data() 
+      {
+        var max_n = Math.floor(data.pos.length / 3)
+        var ix = RandomInt(0, max_n)
+        var c_for_ix = get_color(ix)
+        var x = data.pos[ix * 3] * 100.0;
+        var y = data.pos[ix * 3+ 1] * 100.0;
+        var z = data.pos[ix * 3 + 2] * 100.0;
+        var vertex = new THREE.Vector3();
+        vertex.x = x;
+        vertex.y = y;
+        vertex.z = z;
+        return [vertex, c_for_ix];
+      }
+        
+    function get_color(ix)
+    {
+        var x = data.color[ix * 4];
+        var y = data.color[ix * 4 + 1];
+        var z = data.color[ix * 4 + 2];
+        var vertex = new THREE.Vector3();
+        vertex.x = x;
+        vertex.y = y;
+        vertex.z = z;
+        return vertex;
+    }
+      
+    function init()
+    {
+        data = load_data()
+        //qui
+        global = {
+	        particleX1000 : 70,
+	        particleSize : 0.25
+        };
+			  
+        var gui = new dat.GUI();
+        gui.add(global,"particleX1000", 1, 500);
+        gui.add(global,"particleSize", 0.001, 1.0);
+			  
+        container = document.getElementById( 'container' );
+        camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1100 );
+        
+        var controls = new THREE.OrbitControls( camera );
+        camera.position.set( 0, 20, 100 );
+        controls.update();
+        
+        scene = new THREE.Scene();
+        //scene.fog = new THREE.FogExp2( 0x000000, 0.00189 );
+
+        var geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
+        // invert the geometry on the x-axis so that all of the faces point inward
+        geometry.scale( - 1, 1, 1 );
+        
+        
+        var material = new THREE.MeshBasicMaterial( {
+					map: THREE.ImageUtils.loadTexture( image2.src )
+				} );
+				var mesh = new THREE.Mesh( geometry, material );
+				uuid_that_you_dont_remove2 = new String(mesh.uuid)
+				scene.add( mesh );
+        
+				var helperGeometry = new THREE.BoxBufferGeometry( 100, 100, 100, 4, 4, 4 );
+				var helperMaterial = new THREE.MeshBasicMaterial( { color: 0xff00ff, wireframe: true } );
+				var helper = new THREE.Mesh( helperGeometry, helperMaterial );
+				uuid_that_you_dont_remove = new String(helper.uuid)
+				scene.add( helper );
+        
+        //foo();
+        //
+        //alert(uuid_that_you_dont_remove)
+        
+        /*
+				renderer = new THREE.WebGLRenderer({ preserveDrawingBuffer: true } );
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.autoClearColor = false;
+				renderer.setSize( window.innerWidth, window.innerHeight );
+        */
+				renderer = new THREE.WebGLRenderer();
+				renderer.setPixelRatio( window.devicePixelRatio );
+				renderer.setSize( window.innerWidth, window.innerHeight );
+				
+				container.appendChild( renderer.domElement );
+
+				//
+
+				window.addEventListener( 'resize', onWindowResize, false );
+
+        stats = new Stats();
+        stats.showPanel( 0 );
+        document.body.appendChild( stats.dom );
+        
+        
+        htest();
+			  
+    }
+      
+      //var something = 0
+      
+			function animate()
+			{
+        window.requestAnimationFrame( animate );
+        /*
+        if(something%1000 == 0)
+        {
+          renderer.autoClearColor = false;
+        }
+        else
+        {
+          renderer.autoClearColor = true;
+        }
+        something += 1
+        */
+        stats.begin();
+				renderer.render( scene, camera );
+				foo();
+				//console.log(uuid_that_you_dont_remove)
+        stats.end();
+			}
+			
+      
+      function foo()
+      {
+        var s = global.particleX1000
+        var ps = global.particleSize
+        
+        geometry = new THREE.Geometry();
+        var particleCount = 1000
+        
+        var foo_something = 1.0
+        
+        for (i = 0; i < particleCount; i++)
+        {
+          //var n = generateRandomVector3_shape0000()
+          var lol = get_random_position_from_data()
+          var n = lol[0]
+          
+          
+          var x = Math.random()
+          x = -(foo_something * 0.5) + foo_something * x
+          x += n.x
+          
+          var y = Math.random()
+          y = -(foo_something * 0.5) +  foo_something  * y
+          y += n.y
+          
+          var z = Math.random()
+          z = -(foo_something * 0.5) + foo_something * z
+          z += n.z
+          
+          var vertex = new THREE.Vector3();
+          vertex.x = x;
+          vertex.y = y;
+          vertex.z = z;
+          
+          geometry.vertices.push( vertex );
+          geometry.colors.push(new THREE.Color(lol[1].x, lol[1].y, lol[1].z));
+        }
+        
+        var material = new THREE.PointsMaterial({
+           vertexColors: THREE.VertexColors,
+          size : ps
+        });
+        
+        /*
+        var material = new THREE.PointsMaterial( { size: ps,
+                          vertexColors: THREE.VertexColors,
+                          depthTest: false,
+                          opacity: 0.5,
+                          sizeAttenuation: true,
+                          transparent: true} );
+        */
+        if(scene.children.length < s)
+        {
+            var mesh = new THREE.Points( geometry, material );
+            //scene.add( mesh );
+        }
+        //var mesh = new THREE.Points( geometry, material );
+        //scene.add( mesh );
+        
+        if(scene.children.length > s)
+				{
+				  var v = Math.floor(Math.random() * (scene.children.length))
+				  if(  (new String(uuid_that_you_dont_remove).valueOf() != new String(scene.children[v].uuid).valueOf()) && (new String(uuid_that_you_dont_remove2).valueOf() != new String(scene.children[v].uuid).valueOf()) )
+				  {
+				    //scene.remove( scene.children[v] )
+				  }
+				  v = Math.floor(Math.random() * (scene.children.length))
+				  if(  (new String(uuid_that_you_dont_remove).valueOf() != new String(scene.children[v].uuid).valueOf()) && (new String(uuid_that_you_dont_remove2).valueOf() != new String(scene.children[v].uuid).valueOf()) )
+				  {
+				    //scene.remove( scene.children[v] )
+				  }
+				}
+			}
+      
+		</script>
+	</body>
+</html>

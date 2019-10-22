@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Fussion HTML</title>
+        <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+        <meta charset="utf-8">
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta charset="utf-8">
+        <style>
+                    #my-gui-container{
+                        position: absolute;
+                        top: 0;
+                        right: 0;
+                        z-index: 100;
+                    }
+                
+                
+                body {
+                    margin: 0px;
+                    background-color: #000000;
+                    overflow: hidden;
+                }
+                
+                #info {
+                    position: absolute;
+                    top: 0px; width: 100%;
+                    color: #ffffff;
+                    padding: 5px;
+                    font-family:Monospace;
+                    font-size:13px;
+                    font-weight: bold;
+                    text-align:center;
+                }
+                
+                a {
+                    color: #ff8800;
+                }
+                </style>
+                <script>
+                    function load_data()
+                    {
+                        var v = JSON.parse( JSON.stringify( d8a66434-e4a0-41bb-96be-fcdf60aaf50b ) );
+                        return v;
+                    }
+                </script>
+                </head>
+    <body>
+        <div id="container"></div>
+        <script>6a4efadd-c0bc-4b0a-837c-810cedfed93d</script><!-- script src="three.js"></script-->
+        <script>d3f4ce84-970c-488b-b3ea-dc63ecb1481f</script><!-- script src="OrbitControls.js"></script-->
+        <script>fc890bee-8aab-4d29-973a-8b5fe657aff3</script><!-- script src="Detector.js"></script-->
+        <script>db75f96b-efc4-4dc6-83d3-5ba8c18e5534</script><!-- script src="https://cosmosinfo.neocities.org/device_orientation_controls.js"></script -->
+        <script>53366ace-bf8a-43f9-95c9-cd3cf72f702e</script><!-- script src="L008.js"></script-->
+        <script>var image2 = new Image();image2.src = '09e43568-c30d-49e7-992e-16049bb8909b';</script>
+        <script>90a7e9f2-878e-46b9-8493-e551d6c4dec2</script><!-- script src="helper019.js"></script-->
+        <script>
+            var container, camera, scene, renderer, controls;
+            var stats;
+            var geometry
+            var global
+            var data;
+            
+            init();
+            animate();
+        
+        function init()
+        {
+            data = load_data()
+            container = document.getElementById( 'container' );
+            camera = new THREE.PerspectiveCamera( 75, window.innerWidth / window.innerHeight, 1, 1100 );
+            
+            var controls = new THREE.OrbitControls( camera );
+            camera.position.set( 0, 20, 100 );
+            controls.update();
+            
+            scene = new THREE.Scene();
+            var geometry = new THREE.SphereBufferGeometry( 500, 60, 40 );
+            geometry.scale( - 1, 1, 1 );
+            var material = new THREE.MeshBasicMaterial( {
+                                                       map: THREE.ImageUtils.loadTexture( image2.src )
+                                                       } );
+                                                       var mesh = new THREE.Mesh( geometry, material );
+                                                       scene.add( mesh );
+                                                       renderer = new THREE.WebGLRenderer();
+                                                       renderer.setPixelRatio( window.devicePixelRatio );
+                                                       renderer.setSize( window.innerWidth, window.innerHeight );
+                                                       container.appendChild( renderer.domElement );
+                                                       window.addEventListener( 'resize', onWindowResize, false );
+                                                       htest();
+        }
+        function animate()
+        {
+            window.requestAnimationFrame( animate );
+            renderer.render( scene, camera );
+        }
+</script></body></html>

@@ -1,0 +1,775 @@
+/*
+func state_out_of_full_screen(except_view : UIView)
+{
+for i in self.view.subviews
+{
+if i == except_view
+{
+
+}
+else
+{
+i.isHidden = true
+}
+}
+UI_menu_Controller.cl_menu_main?.menu.isHidden = false
+ui_slider?.show()
+ui_statusSession?.visible()
+}
+*/
+
+/*
+my_slider = UI_RotationScaleSliders.init()
+my_slider?.create(frame: CGRect.init(x: self.view.frame.width * 0.65, y: self.view.frame.height * 0.1, width: self.view.frame.width * 0.35, height: 45 * 4))
+my_slider?.add(view: self.view)
+my_slider?.show()
+my_slider?.f_slider_values_change = self.delegate.delegate_user_interface_rotation_and_scale
+*/
+
+//statusSession
+/*
+self.ui_statusSession = UI_StatusSession()
+self.ui_statusSession?.create(parent_view: self.view)
+ui_statusSession?.visible()
+*/
+
+
+//MARK: sliders callback function
+//TODO: find better name
+/*
+extension UI_Controller
+{
+func f_callback_sliders( rotation_x : Float, rotation_y : Float, rotation_z : Float, scale_x : Float, scale_y : Float, scale_z : Float, additive_vs_multiplicative : Bool)
+{
+self.delegate.delegate_user_interface_rotation_and_scale(rotation: SCNVector3.init(rotation_x, rotation_y, rotation_z), scale: SCNVector3.init(scale_x, scale_y, scale_z), additive_vs_multiplicative: additive_vs_multiplicative)
+}
+}
+*/
+
+
+/*
+if command == .create
+{
+UI_menu_Controller.cl_menu_create?.delegate_togle(ui_controller: self)
+UI_menu_Controller.hide_all_beside(ui_controller: self, menuType: .create, hide_also_main_menu: false)
+self.my_slider?.show()
+}
+else if command == .menu
+{
+UI_menu_Controller.cl_menu_menu?.delegate_togle(ui_controller: self)
+UI_menu_Controller.hide_all_beside(ui_controller: self, menuType: .menu, hide_also_main_menu: false)
+self.my_slider?.hide()
+}
+else if command == .select
+{
+state_out_of_full_screen()
+UI_menu_Controller.hide_all_beside_main_menu(ui_controller: self)
+self.my_slider?.hide()
+}
+else if command == .move_world
+{
+UI_menu_Controller.cl_menu_move?.delegate_togle(ui_controller: self)
+UI_menu_Controller.hide_all_beside(ui_controller: self, menuType: .move, hide_also_main_menu: false)
+self.my_slider?.hide()
+}
+else if command == .move_object
+{
+UI_menu_Controller.hide_all_beside_main_menu(ui_controller: self)
+self.my_slider?.hide()
+}
+*/
+
+//LET make starting scene
+//sc_controller_delegate?.load_scene(model: SceneModel.test_scene())
+
+
+
+//pip
+//var a = UserDefaults.standard.bool(forKey: "rok")
+//UserDefaults.standard.bool(forKey: <#T##String#>)
+//print("kokulele", a)
+
+
+
+
+/*
+func create_slider(letter : String, frame : CGRect, min_value : Float, max_value : Float, target : Any?, action : Selector) -> UISlider
+{
+let sl = UISlider.init(frame: frame)
+let img = generate_image_from_UILabel(text: letter)
+sl.minimumValue = min_value
+sl.maximumValue = max_value
+sl.isContinuous = true
+sl.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.5, alpha: 0.15)
+sl.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+sl.setThumbImage(img, for: .normal)
+sl.setThumbImage(img, for: .highlighted)
+sl.addTarget(target, action: action, for: .valueChanged)
+return sl
+}
+
+self.slidersXYZ = SlidersXYZ(x: create_slider(letter: "X", frame: CGRect.init(x: 0, y: h_enota * 1.0, width: frame.width, height: h_enota), min_value: min_value, max_value: max_value, target: self, action: #selector(self.sliderXValueDidChange(_:))),
+y: create_slider(letter: "Y", frame: CGRect.init(x: 0, y: h_enota * 2.0, width: frame.width, height: h_enota), min_value: min_value, max_value: max_value, target: self, action: #selector(self.sliderYValueDidChange(_:))),
+z: create_slider(letter: "Z", frame: CGRect.init(x: 0, y: h_enota * 3.0, width: frame.width, height: h_enota), min_value: min_value, max_value: max_value, target: self, action: #selector(self.sliderZValueDidChange(_:))))
+*/
+
+
+/*
+let slider_x_img = generate_image_from_UILabel(text: "X")
+slider_x = UISlider.init(frame: CGRect.init(x: 0, y: h_enota * 1.0, width: frame.width, height: h_enota))
+slider_x?.minimumValue = min_value
+slider_x?.maximumValue = max_value
+slider_x?.isContinuous = true
+slider_x?.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.5, alpha: 0.15)
+slider_x?.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+slider_x?.addTarget(self, action : #selector(self.sliderXValueDidChange(_:)), for: .valueChanged)
+slider_x?.setThumbImage(slider_x_img, for: .normal)
+slider_x?.setThumbImage(slider_x_img, for: .highlighted)
+view_slider?.addSubview(slider_x!)
+
+let slider_y_img = generate_image_from_UILabel(text: "Y")
+slider_y = UISlider.init(frame: CGRect.init(x: 0, y: h_enota * 2.0, width: frame.width, height: h_enota * 1.0))
+slider_y?.minimumValue = min_value
+slider_y?.maximumValue = max_value
+slider_y?.isContinuous = true
+slider_y?.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.5, alpha: 0.15)
+slider_y?.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+slider_y?.addTarget(self, action : #selector(self.sliderYValueDidChange(_:)), for: .valueChanged)
+slider_y?.setThumbImage(slider_y_img, for: .normal)
+slider_y?.setThumbImage(slider_y_img, for: .highlighted)
+view_slider?.addSubview(slider_y!)
+
+let slider_z_img = generate_image_from_UILabel(text: "Z")
+slider_z = UISlider.init(frame: CGRect.init(x: 0, y: h_enota * 3.0, width: frame.width, height: h_enota * 1.0))
+slider_z?.minimumValue = min_value
+slider_z?.maximumValue = max_value
+slider_z?.isContinuous = true
+slider_z?.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.5, alpha: 0.15)
+slider_z?.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+slider_z?.addTarget(self, action : #selector(self.sliderZValueDidChange(_:)), for: .valueChanged)
+slider_z?.setThumbImage(slider_z_img, for: .normal)
+slider_z?.setThumbImage(slider_z_img, for: .highlighted)
+view_slider?.addSubview(slider_z!)
+*/
+
+
+//
+//  UI_RotationScaleSliders.swift
+//  Holoss
+//
+//  Created by Rok Kosuta on 04/03/2018.
+//  Copyright © 2018 Rok Kosuta. All rights reserved.
+//
+
+import Foundation
+import UIKit
+import ARKit
+
+class UI_RotationScaleSliders : NSObject
+{
+struct Sliders
+{
+var slider_x : UISlider?
+var slider_y : UISlider?
+var slider_z : UISlider?
+
+mutating func create(f_x : ()->(UISlider), f_y : ()->(UISlider), f_z : ()->(UISlider))
+{
+self.slider_x = f_x()
+self.slider_y = f_y()
+self.slider_z = f_z()
+}
+
+private func visability(hidden : Bool)
+{
+self.slider_x?.isHidden = hidden
+self.slider_y?.isHidden = hidden
+self.slider_z?.isHidden = hidden
+}
+
+func hide()
+{
+visability(hidden: true)
+}
+
+func show()
+{
+visability(hidden: false)
+}
+
+func create_sl(letter : String, frame : CGRect, min_value : Float, max_value : Float) -> UISlider
+{
+let img = generate_image_from_UILabel(text: letter)
+let sl = UISlider.init(frame: frame)
+sl.minimumValue = min_value
+sl.maximumValue = max_value
+sl.isContinuous = true
+sl.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.5, alpha: 0.15)
+sl.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+sl.setThumbImage(img, for: .normal)
+sl.setThumbImage(img, for: .highlighted)
+return sl
+}
+
+private func generate_image_from_UILabel(text : String, size : CGSize = CGSize.init(width: 30, height: 30), color : UIColor = UIColor.rgbaFrom0to255(r: 119, g: 136, b: 170, a: 255)) -> UIImage
+{
+let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: size.width, height: size.height))
+label.text = text
+label.textColor = color
+let img = UIImage.imageWithLabel(label: label)
+return img
+}
+}
+
+private var sliders : Sliders = Sliders()
+
+private var ui_switch : UISwitch?
+private var ui_switch_imageView : UIImageView?
+
+private var view_slider : UIView?
+private var button_close : UIButton?
+private var ui_switch_add_mult_rotation : UISwitch?
+private var ui_switch_add_mult_rotation_imageView : UIImageView?
+
+private var label_1 : UILabel?
+
+public var f_slider_values_changed : ( (Float, Float, Float, Float, Float, Float, Bool)->())?
+
+private var rotation : SCNVector3 = SCNVector3.init(1.0, 1.0, 1.0)
+private var scale : SCNVector3 = SCNVector3.init(1.0, 1.0, 1.0)
+
+
+
+func create(frame : CGRect)
+{
+
+view_slider = UIView.init(frame: frame)
+view_slider?.backgroundColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.1)
+view_slider?.layer.cornerRadius = 5.0
+
+
+let h_enota = frame.height * (1.0 / 4.0)
+
+let min_value : Float = 0.0
+let max_value : Float = 1.0
+
+ui_switch = UISwitch()
+ui_switch?.setOn(false, animated: true)
+ui_switch?.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.2, alpha: 0.1)
+ui_switch?.onTintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.1)
+ui_switch?.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.4)
+ui_switch?.backgroundColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.1)
+ui_switch?.addTarget(self, action: #selector(switch_changed(sender:)), for: UIControlEvents.valueChanged)
+ui_switch!.frame = CGRect.init(x: 0, y: h_enota * 0.0, width: frame.width * 0.4, height: h_enota)
+ui_switch?.layer.cornerRadius = 5.0
+view_slider?.addSubview(ui_switch!)
+
+self.ui_switch_imageView = UIImageView.init(frame: CGRect.init(x: ui_switch!.frame.origin.x, y: ui_switch!.frame.height, width: ui_switch!.frame.width, height: 20) )
+self.ui_switch_imageView?.image = generate_image_from_UILabel(text: Global.Constants.scale_unicode_string(), size:  CGSize.init(width: ui_switch!.frame.width, height: ui_switch!.frame.height))
+view_slider?.addSubview(self.ui_switch_imageView!)
+
+
+ui_switch_add_mult_rotation = UISwitch()
+ui_switch_add_mult_rotation?.setOn(false, animated: true)
+ui_switch_add_mult_rotation?.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.2, alpha: 0.1)
+ui_switch_add_mult_rotation?.onTintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.1)
+ui_switch_add_mult_rotation?.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.4)
+ui_switch_add_mult_rotation?.backgroundColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.1)
+ui_switch_add_mult_rotation?.addTarget(self, action: #selector(switch_changed_mult_add(sender:)), for: UIControlEvents.valueChanged)
+ui_switch_add_mult_rotation!.frame = CGRect.init(x: frame.width * 0.4, y:  h_enota * 0.0, width: frame.width * 0.25, height: h_enota)
+ui_switch_add_mult_rotation?.layer.cornerRadius = 5.0
+view_slider?.addSubview(ui_switch_add_mult_rotation!)
+
+ui_switch_add_mult_rotation_imageView = UIImageView.init(frame: CGRect.init(x: ui_switch_add_mult_rotation!.frame.origin.x, y: ui_switch_add_mult_rotation!.frame.height, width: ui_switch_add_mult_rotation!.frame.width, height: 20))
+ui_switch_add_mult_rotation_imageView?.image = generate_image_from_UILabel(text: Global.Constants.locked_to_camera_string())
+view_slider?.addSubview(ui_switch_add_mult_rotation_imageView!)
+
+button_close = UIButton()
+button_close?.frame = CGRect.init(x: frame.width * 0.75, y: h_enota * 0.0, width: frame.width * 0.25, height: h_enota * 0.75)
+button_close?.layer.cornerRadius = 15.0
+button_close?.addTarget(self, action: #selector(self.button_event), for: .touchUpInside)
+button_close?.setTitle("X", for: .normal)
+button_close?.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.8)
+button_close?.setTitleColor(UIColor.white, for: .normal)
+button_close?.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+view_slider?.addSubview(button_close!)
+
+
+
+
+
+func create_slider_x() -> UISlider
+{
+let sl =  self.sliders.create_sl(letter: "X", frame: CGRect.init(x: 0, y: h_enota * 1.0, width: frame.width, height: h_enota), min_value: min_value, max_value: max_value)
+sl.addTarget(self, action : #selector(self.sliderXValueDidChange(_:)), for: .valueChanged)
+return sl
+}
+
+func create_slider_y() -> UISlider
+{
+let sl = self.sliders.create_sl(letter: "Y", frame: CGRect.init(x: 0, y: h_enota * 2.0, width: frame.width, height: h_enota * 1.0), min_value: min_value, max_value: max_value)
+sl.addTarget(self, action : #selector(self.sliderYValueDidChange(_:)), for: .valueChanged)
+return sl
+}
+
+func create_slider_z() -> UISlider
+{
+let sl = self.sliders.create_sl(letter: "Z", frame: CGRect.init(x: 0, y: h_enota * 3.0, width: frame.width, height: h_enota * 1.0), min_value: min_value, max_value: max_value)
+sl.addTarget(self, action : #selector(self.sliderZValueDidChange(_:)), for: .valueChanged)
+return sl
+}
+
+self.sliders.create(f_x: create_slider_x, f_y: create_slider_y, f_z: create_slider_z)
+view_slider?.addSubview(self.sliders.slider_x!)
+view_slider?.addSubview(self.sliders.slider_y!)
+view_slider?.addSubview(self.sliders.slider_z!)
+
+/*
+self.sliders.slider_x = UISlider.init(frame: CGRect.init(x: 0, y: h_enota * 1.0, width: frame.width, height: h_enota))
+self.sliders.slider_x?.minimumValue = min_value
+self.sliders.slider_x?.maximumValue = max_value
+self.sliders.slider_x?.isContinuous = true
+self.sliders.slider_x?.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.5, alpha: 0.15)
+self.sliders.slider_x?.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+self.sliders.slider_x?.addTarget(self, action : #selector(self.sliderXValueDidChange(_:)), for: .valueChanged)
+self.sliders.slider_x?.setThumbImage(slider_x_img, for: .normal)
+self.sliders.slider_x?.setThumbImage(slider_x_img, for: .highlighted)
+view_slider?.addSubview(self.sliders.slider_x!)
+
+let slider_y_img = generate_image_from_UILabel(text: "Y")
+self.sliders.slider_y = UISlider.init(frame: CGRect.init(x: 0, y: h_enota * 2.0, width: frame.width, height: h_enota * 1.0))
+self.sliders.slider_y?.minimumValue = min_value
+self.sliders.slider_y?.maximumValue = max_value
+self.sliders.slider_y?.isContinuous = true
+self.sliders.slider_y?.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.5, alpha: 0.15)
+self.sliders.slider_y?.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+self.sliders.slider_y?.addTarget(self, action : #selector(self.sliderYValueDidChange(_:)), for: .valueChanged)
+self.sliders.slider_y?.setThumbImage(slider_y_img, for: .normal)
+self.sliders.slider_y?.setThumbImage(slider_y_img, for: .highlighted)
+view_slider?.addSubview(self.sliders.slider_y!)
+
+let slider_z_img = generate_image_from_UILabel(text: "Z")
+self.sliders.slider_z = UISlider.init(frame: CGRect.init(x: 0, y: h_enota * 3.0, width: frame.width, height: h_enota * 1.0))
+self.sliders.slider_z?.minimumValue = min_value
+self.sliders.slider_z?.maximumValue = max_value
+self.sliders.slider_z?.isContinuous = true
+self.sliders.slider_z?.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.5, alpha: 0.15)
+self.sliders.slider_z?.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+self.sliders.slider_z?.addTarget(self, action : #selector(self.sliderZValueDidChange(_:)), for: .valueChanged)
+self.sliders.slider_z?.setThumbImage(slider_z_img, for: .normal)
+self.sliders.slider_z?.setThumbImage(slider_z_img, for: .highlighted)
+view_slider?.addSubview(self.sliders.slider_z!)
+*/
+}
+
+@objc func button_event()
+{
+print("button_event")
+
+if self.sliders.slider_x!.isHidden//if self.slider_x!.isHidden
+{
+//self.sliders.slider_x?.isHidden = false //self.slider_x?.isHidden = false
+//self.sliders.slider_y?.isHidden = false //self.slider_y?.isHidden = false
+//self.sliders.slider_z?.isHidden = false //self.slider_z?.isHidden = false
+self.sliders.show()
+
+self.view_slider?.backgroundColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.1)
+self.ui_switch_add_mult_rotation?.isHidden = false
+self.ui_switch?.isHidden = false
+self.button_close?.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.8)
+self.ui_switch_imageView?.isHidden = false
+self.ui_switch_add_mult_rotation_imageView?.isHidden = false
+}
+else
+{
+//self.sliders.slider_x?.isHidden = true //self.slider_x?.isHidden = true
+//self.sliders.slider_y?.isHidden = true //self.slider_y?.isHidden = true
+//self.sliders.slider_z?.isHidden = true //self.slider_z?.isHidden = true
+
+self.sliders.hide()
+
+self.view_slider?.backgroundColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.0)
+self.ui_switch_add_mult_rotation?.isHidden = true
+self.ui_switch?.isHidden = true
+self.button_close?.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.4)
+self.ui_switch_imageView?.isHidden = true
+self.ui_switch_add_mult_rotation_imageView?.isHidden = true
+}
+}
+
+
+@objc func switch_changed(sender: UISwitch!)
+{
+print("Switch value is \(sender.isOn)")
+if ui_switch!.isOn
+{
+self.sliders.slider_x!.value = self.rotation.x //slider_x!.value = self.rotation.x
+self.sliders.slider_y!.value = self.rotation.y //slider_y!.value = self.rotation.y
+self.sliders.slider_z!.value = self.rotation.z //slider_z!.value = self.rotation.zz
+self.ui_switch_imageView?.image = generate_image_from_UILabel(text: Global.Constants.rotate_unicode_string(), size:  CGSize.init(width: ui_switch!.frame.width, height: ui_switch!.frame.height))
+}
+else
+{
+self.sliders.slider_x!.value = self.scale.x //slider_x!.value = self.scale.x
+self.sliders.slider_y!.value = self.scale.y //slider_y!.value = self.scale.y
+self.sliders.slider_z!.value = self.scale.z // slider_z!.value = self.scale.z
+self.ui_switch_imageView?.image = generate_image_from_UILabel(text: Global.Constants.scale_unicode_string(), size:  CGSize.init(width: ui_switch!.frame.width, height: ui_switch!.frame.height))
+}
+}
+
+
+@objc func switch_changed_mult_add(sender : UISwitch!)
+{
+print("switch_changed_mult_add", sender.isOn)
+self.f_slider_values_changed?(rotation.x, rotation.y, rotation.z, scale.x, scale.y, scale.z, ui_switch_add_mult_rotation!.isOn)
+
+if sender.isOn
+{
+ui_switch_add_mult_rotation_imageView?.image = generate_image_from_UILabel(text: Global.Constants.unlocked_to_camera_string())
+}
+else
+{
+ui_switch_add_mult_rotation_imageView?.image = generate_image_from_UILabel(text: Global.Constants.locked_to_camera_string())
+}
+}
+
+@objc func sliderXValueDidChange(_ sender:UISlider!)
+{
+if ui_switch!.isOn
+{
+self.rotation.x = sender.value
+}
+else
+{
+self.scale.x = sender.value
+}
+
+self.f_slider_values_changed?(rotation.x, rotation.y, rotation.z, scale.x, scale.y, scale.z, ui_switch_add_mult_rotation!.isOn)
+}
+
+@objc func sliderYValueDidChange(_ sender:UISlider!)
+{
+if ui_switch!.isOn
+{
+self.rotation.y = sender.value
+}
+else
+{
+self.scale.y = sender.value
+}
+self.f_slider_values_changed?(rotation.x, rotation.y, rotation.z, scale.x, scale.y, scale.z, ui_switch_add_mult_rotation!.isOn)
+}
+
+@objc func sliderZValueDidChange(_ sender:UISlider!)
+{
+if ui_switch!.isOn
+{
+self.rotation.z = sender.value
+}
+else
+{
+self.scale.z = sender.value
+}
+self.f_slider_values_changed?(rotation.x, rotation.y, rotation.z, scale.x, scale.y, scale.z, ui_switch_add_mult_rotation!.isOn)
+}
+
+func show()
+{
+self.view_slider?.isHidden = false
+}
+
+func hide()
+{
+self.view_slider?.isHidden = true
+}
+
+
+func add(view : UIView)
+{
+view.addSubview(self.view_slider!)
+}
+}
+
+
+
+
+
+
+/*
+private var slider_x : UISlider?
+private var slider_y : UISlider?
+private var slider_z : UISlider?
+*/
+
+import Foundation
+import UIKit
+import ARKit
+
+class UI_RotationScaleSliders : NSObject
+{
+private var slider_x : UISlider?
+private var slider_y : UISlider?
+private var slider_z : UISlider?
+
+private var ui_switch : UISwitch?
+private var ui_switch_imageView : UIImageView?
+
+private var view_slider : UIView?
+private var button_close : UIButton?
+private var ui_switch_add_mult_rotation : UISwitch?
+private var ui_switch_add_mult_rotation_imageView : UIImageView?
+
+private var label_1 : UILabel?
+
+public var f_slider_values_changed : ( (Float, Float, Float, Float, Float, Float, Bool)->())?
+
+/*
+private var scale_x : Float = 1.0
+private var scale_y : Float = 1.0
+private var scale_z : Float = 1.0
+
+private var rotation_x : Float = 1.0
+private var rotation_y : Float = 1.0
+private var rotation_z : Float = 1.0
+*/
+
+private var rotation : SCNVector3 = SCNVector3.init(1.0, 1.0, 1.0)
+private var scale : SCNVector3 = SCNVector3.init(1.0, 1.0, 1.0)
+
+private func generate_image_from_UILabel(text : String, size : CGSize = CGSize.init(width: 30, height: 30), color : UIColor = UIColor.rgbaFrom0to255(r: 119, g: 136, b: 170, a: 255)) -> UIImage
+{
+let label = UILabel.init(frame: CGRect.init(x: 0, y: 0, width: size.width, height: size.height))
+label.text = text
+label.textColor = color
+let img = UIImage.imageWithLabel(label: label)
+return img
+}
+
+func create(frame : CGRect)
+{
+
+view_slider = UIView.init(frame: frame)
+view_slider?.backgroundColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.1)
+view_slider?.layer.cornerRadius = 5.0
+
+let h_enota = frame.height * (1.0 / 4.0)
+
+let min_value : Float = 0.0
+let max_value : Float = 1.0
+
+ui_switch = UISwitch()
+ui_switch?.setOn(false, animated: true)
+ui_switch?.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.2, alpha: 0.1)
+ui_switch?.onTintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.1)
+ui_switch?.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.4)
+ui_switch?.backgroundColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.1)
+ui_switch?.addTarget(self, action: #selector(switch_changed(sender:)), for: UIControlEvents.valueChanged)
+ui_switch!.frame = CGRect.init(x: 0, y: h_enota * 0.0, width: frame.width * 0.4, height: h_enota)
+ui_switch?.layer.cornerRadius = 5.0
+view_slider?.addSubview(ui_switch!)
+
+self.ui_switch_imageView = UIImageView.init(frame: CGRect.init(x: ui_switch!.frame.origin.x, y: ui_switch!.frame.height, width: ui_switch!.frame.width, height: 20) )
+self.ui_switch_imageView?.image = generate_image_from_UILabel(text: Global.Constants.scale_unicode_string(), size:  CGSize.init(width: ui_switch!.frame.width, height: ui_switch!.frame.height))
+view_slider?.addSubview(self.ui_switch_imageView!)
+
+
+ui_switch_add_mult_rotation = UISwitch()
+ui_switch_add_mult_rotation?.setOn(false, animated: true)
+ui_switch_add_mult_rotation?.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.2, alpha: 0.1)
+ui_switch_add_mult_rotation?.onTintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.1)
+ui_switch_add_mult_rotation?.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.4)
+ui_switch_add_mult_rotation?.backgroundColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.1)
+ui_switch_add_mult_rotation?.addTarget(self, action: #selector(switch_changed_mult_add(sender:)), for: UIControlEvents.valueChanged)
+ui_switch_add_mult_rotation!.frame = CGRect.init(x: frame.width * 0.4, y:  h_enota * 0.0, width: frame.width * 0.25, height: h_enota)
+ui_switch_add_mult_rotation?.layer.cornerRadius = 5.0
+view_slider?.addSubview(ui_switch_add_mult_rotation!)
+
+ui_switch_add_mult_rotation_imageView = UIImageView.init(frame: CGRect.init(x: ui_switch_add_mult_rotation!.frame.origin.x, y: ui_switch_add_mult_rotation!.frame.height, width: ui_switch_add_mult_rotation!.frame.width, height: 20))
+ui_switch_add_mult_rotation_imageView?.image = generate_image_from_UILabel(text: Global.Constants.locked_to_camera_string())
+view_slider?.addSubview(ui_switch_add_mult_rotation_imageView!)
+
+button_close = UIButton()
+button_close?.frame = CGRect.init(x: frame.width * 0.75, y: h_enota * 0.0, width: frame.width * 0.25, height: h_enota * 0.75)
+button_close?.layer.cornerRadius = 15.0
+button_close?.addTarget(self, action: #selector(self.button_event), for: .touchUpInside)
+button_close?.setTitle("X", for: .normal)
+button_close?.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.8)
+button_close?.setTitleColor(UIColor.white, for: .normal)
+button_close?.titleLabel?.font = UIFont.systemFont(ofSize: 12)
+view_slider?.addSubview(button_close!)
+
+let slider_x_img = generate_image_from_UILabel(text: "X")
+slider_x = UISlider.init(frame: CGRect.init(x: 0, y: h_enota * 1.0, width: frame.width, height: h_enota))
+slider_x?.minimumValue = min_value
+slider_x?.maximumValue = max_value
+slider_x?.isContinuous = true
+slider_x?.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.5, alpha: 0.15)
+slider_x?.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+slider_x?.addTarget(self, action : #selector(self.sliderXValueDidChange(_:)), for: .valueChanged)
+slider_x?.setThumbImage(slider_x_img, for: .normal)
+slider_x?.setThumbImage(slider_x_img, for: .highlighted)
+view_slider?.addSubview(slider_x!)
+
+let slider_y_img = generate_image_from_UILabel(text: "Y")
+slider_y = UISlider.init(frame: CGRect.init(x: 0, y: h_enota * 2.0, width: frame.width, height: h_enota * 1.0))
+slider_y?.minimumValue = min_value
+slider_y?.maximumValue = max_value
+slider_y?.isContinuous = true
+slider_y?.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.5, alpha: 0.15)
+slider_y?.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+slider_y?.addTarget(self, action : #selector(self.sliderYValueDidChange(_:)), for: .valueChanged)
+slider_y?.setThumbImage(slider_y_img, for: .normal)
+slider_y?.setThumbImage(slider_y_img, for: .highlighted)
+view_slider?.addSubview(slider_y!)
+
+let slider_z_img = generate_image_from_UILabel(text: "Z")
+slider_z = UISlider.init(frame: CGRect.init(x: 0, y: h_enota * 3.0, width: frame.width, height: h_enota * 1.0))
+slider_z?.minimumValue = min_value
+slider_z?.maximumValue = max_value
+slider_z?.isContinuous = true
+slider_z?.tintColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.5, alpha: 0.15)
+slider_z?.thumbTintColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.5)
+slider_z?.addTarget(self, action : #selector(self.sliderZValueDidChange(_:)), for: .valueChanged)
+slider_z?.setThumbImage(slider_z_img, for: .normal)
+slider_z?.setThumbImage(slider_z_img, for: .highlighted)
+view_slider?.addSubview(slider_z!)
+
+
+
+}
+
+@objc func button_event()
+{
+print("button_event")
+
+if self.slider_x!.isHidden
+{
+self.slider_x?.isHidden = false
+self.slider_y?.isHidden = false
+self.slider_z?.isHidden = false
+self.view_slider?.backgroundColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.1)
+self.ui_switch_add_mult_rotation?.isHidden = false
+self.ui_switch?.isHidden = false
+self.button_close?.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.8)
+self.ui_switch_imageView?.isHidden = false
+self.ui_switch_add_mult_rotation_imageView?.isHidden = false
+}
+else
+{
+self.slider_x?.isHidden = true
+self.slider_y?.isHidden = true
+self.slider_z?.isHidden = true
+self.view_slider?.backgroundColor = UIColor.init(red: 0.1, green: 0.1, blue: 0.1, alpha: 0.0)
+self.ui_switch_add_mult_rotation?.isHidden = true
+self.ui_switch?.isHidden = true
+self.button_close?.backgroundColor = UIColor.init(red: 0.5, green: 0.5, blue: 0.5, alpha: 0.4)
+self.ui_switch_imageView?.isHidden = true
+self.ui_switch_add_mult_rotation_imageView?.isHidden = true
+}
+}
+
+
+@objc func switch_changed(sender: UISwitch!)
+{
+print("Switch value is \(sender.isOn)")
+if ui_switch!.isOn
+{
+slider_x!.value = self.rotation.x //self.rotation_x
+slider_y!.value = self.rotation.y //self.rotation_y
+slider_z!.value = self.rotation.z //self.rotation_z
+self.ui_switch_imageView?.image = generate_image_from_UILabel(text: Global.Constants.rotate_unicode_string(), size:  CGSize.init(width: ui_switch!.frame.width, height: ui_switch!.frame.height))
+}
+else
+{
+slider_x!.value = self.scale.x//self.scale_x
+slider_y!.value = self.scale.y//self.scale_y
+slider_z!.value = self.scale.z//self.scale_z
+self.ui_switch_imageView?.image = generate_image_from_UILabel(text: Global.Constants.scale_unicode_string(), size:  CGSize.init(width: ui_switch!.frame.width, height: ui_switch!.frame.height))
+}
+}
+
+
+@objc func switch_changed_mult_add(sender : UISwitch!)
+{
+print("switch_changed_mult_add", sender.isOn)
+//self.f_slider_values_changed?(rotation_x, rotation_y, rotation_z, scale_x, scale_y, scale_z, ui_switch_add_mult_rotation!.isOn)
+self.f_slider_values_changed?(rotation.x, rotation.y, rotation.z, scale.x, scale.y, scale.z, ui_switch_add_mult_rotation!.isOn)
+
+if sender.isOn
+{
+ui_switch_add_mult_rotation_imageView?.image = generate_image_from_UILabel(text: Global.Constants.unlocked_to_camera_string())
+}
+else
+{
+ui_switch_add_mult_rotation_imageView?.image = generate_image_from_UILabel(text: Global.Constants.locked_to_camera_string())
+}
+}
+
+@objc func sliderXValueDidChange(_ sender:UISlider!)
+{
+if ui_switch!.isOn
+{
+//self.rotation_x = sender.value
+self.rotation.x = sender.value
+}
+else
+{
+//self.scale_x = sender.value
+self.scale.x = sender.value
+}
+
+//self.f_slider_values_changed?(rotation_x, rotation_y, rotation_z, scale_x, scale_y, scale_z, ui_switch_add_mult_rotation!.isOn)
+self.f_slider_values_changed?(rotation.x, rotation.y, rotation.z, scale.x, scale.y, scale.z, ui_switch_add_mult_rotation!.isOn)
+}
+
+@objc func sliderYValueDidChange(_ sender:UISlider!)
+{
+if ui_switch!.isOn
+{
+//self.rotation_y = sender.value
+self.rotation.y = sender.value
+}
+else
+{
+//self.scale_y = sender.value
+self.scale.y = sender.value
+}
+
+//self.f_slider_values_changed?(rotation_x, rotation_y, rotation_z, scale_x, scale_y, scale_z, ui_switch_add_mult_rotation!.isOn)
+self.f_slider_values_changed?(rotation.x, rotation.y, rotation.z, scale.x, scale.y, scale.z, ui_switch_add_mult_rotation!.isOn)
+}
+
+@objc func sliderZValueDidChange(_ sender:UISlider!)
+{
+if ui_switch!.isOn
+{
+//self.rotation_z = sender.value
+self.rotation.z = sender.value
+}
+else
+{
+//self.scale_z = sender.value
+self.scale.z = sender.value
+}
+
+//self.f_slider_values_changed?(rotation_x, rotation_y, rotation_z, scale_x, scale_y, scale_z, ui_switch_add_mult_rotation!.isOn)
+self.f_slider_values_changed?(rotation.x, rotation.y, rotation.z, scale.x, scale.y, scale.z, ui_switch_add_mult_rotation!.isOn)
+}
+
+func show()
+{
+self.view_slider?.isHidden = false
+}
+
+func hide()
+{
+self.view_slider?.isHidden = true
+}
+
+
+func add(view : UIView)
+{
+view.addSubview(self.view_slider!)
+}
+}
+
